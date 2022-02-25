@@ -85,5 +85,6 @@ var rollbar = new Rollbar({
   captureUnhandledRejections: true,
 })
 
+app.use(rollbar.errorHandler());
 // record a generic message and send it to Rollbar
 rollbar.log('Assessment-QA')
