@@ -80,7 +80,7 @@ app.get('/api/player', (req, res) => {
         res.sendStatus(400)
     }
 })
-
+rollbar.log('Assessment-QA')
 const port = process.env.PORT || 3000
 app.use(rollbar.errorHandler());
 app.listen(port, () => {
