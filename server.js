@@ -5,6 +5,16 @@ const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
 
 app.use(express.json())
+
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: 'cce69742212a462a94b2fd2eda934ccb',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+
 app.use(express.static(path.join(__dirname,'/public')))
 app.get('/api/robots', (req, res) => {
     try {
@@ -77,13 +87,6 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })
 
-// include and initialize the rollbar library with your access token
-var Rollbar = require('rollbar')
-var rollbar = new Rollbar({
-  accessToken: 'cce69742212a462a94b2fd2eda934ccb',
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-})
 
 app.use(rollbar.errorHandler());
 // record a generic message and send it to Rollbar
